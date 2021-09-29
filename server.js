@@ -60,7 +60,7 @@ const server = http.createServer((request, response) => {
       "Content-Type": "text/plain"
     })
     // http body
-    response.write(moment().format())
+    response.write(moment().format("LTS"))
 
     // send http message
     response.end()
