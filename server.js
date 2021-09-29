@@ -21,48 +21,53 @@ const server = http.createServer((request, response) => {
     })
 
     // http body
-    response.write("<h1>¡Ya sé Node!</h1>")
+    response.write("<h1> ¡Ya se Node! </h1>")
 
     // send http message
     response.end()
   }
 
   // Página /hw
-  if (request.url === "/hw") {
+  else if (request.url === "/hw") {
     // Http headers
     response.writeHead(200, {
       "Content-Type": "text/html"
     })
 
     // http body
-    response.write(<p style="color:orange;">Happy Halloween!</p>)
+    response.write('<p style="color:orange;">Happy Halloween!</p>')
 
     // send http message
     response.end()
   }
 
   // Página /myjson
-  if (request.url === "/hw") {
+  else if (request.url === "/myjson") {
     // Http headers
     response.writeHead(200, {
-      "Content-Type": "application/json"
+      "Content-Type": "text/javascript"
     })
     const monster = { "nombre": "Espagueti", "apellido": "Volador" }
-    return response.json(monster)
+    response.write(monster)
+    response.end()
+
   }
 
   // Página /timenow
-  if (request.url === "/timenow") {
+  else if (request.url === "/timenow") {
     // Http headers
     response.writeHead(200, {
-      "Content-Type": "text/html"
+      "Content-Type": "text/plain"
     })
     // http body
-    response.write(moment().format(LTS))
+    response.write(moment().format())
 
     // send http message
     response.end()
   }
+
+  // El resto
+  //else
 })
 
 // ----- Start server -----
