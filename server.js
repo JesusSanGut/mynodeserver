@@ -1,4 +1,4 @@
-// ----- Import libraries ----- prueba
+// ----- Import libraries -----
 
 const moment = require("moment")
 const http = require("http")
@@ -15,6 +15,10 @@ const server = http.createServer((request, response) => {
 
   // Pagina principal
   if (request.url === "/") {
+    fs.appendFile("requests.log", `\n ${moment().format("LTS")} : /`, (err) => {
+      if (err) {
+        console.log(err)}
+    })
 
     // Http headers
     response.writeHead(200, {
@@ -30,6 +34,10 @@ const server = http.createServer((request, response) => {
 
   // Página /hw
   else if (request.url === "/hw") {
+    fs.appendFile("requests.log", `\n ${moment().format("LTS")} : /hw`, (err) => {
+      if (err) {
+        console.log(err)}
+    })
     // Http headers
     response.writeHead(200, {
       "Content-Type": "text/html"
@@ -44,6 +52,10 @@ const server = http.createServer((request, response) => {
 
   // Página /myjson
   else if (request.url === "/myjson") {
+    fs.appendFile("requests.log", `\n ${moment().format("LTS")} : /myjson`, (err) => {
+      if (err) {
+        console.log(err)}
+    })
     // Http headers
     response.writeHead(200, {
       "Content-Type": "application/json"
@@ -55,6 +67,10 @@ const server = http.createServer((request, response) => {
 
   // Página /timenow
   else if (request.url === "/timenow") {
+    fs.appendFile("requests.log", `\n ${moment().format("LTS")} : /timenow`, (err) => {
+      if (err) {
+        console.log(err)}
+    })
     // Http headers
     response.writeHead(200, {
       "Content-Type": "text/plain"
@@ -66,16 +82,31 @@ const server = http.createServer((request, response) => {
     response.end()
   }
 
-  // else if (request.url === "/web") {
-  //   fs.readFile("front/index.html", (error, data) => {
-  //     response.writeHead(200, { "Content-Type": "text/html" })
-  //     response.write(data)
-  //     response.end()
-  //   })
-  // }
+  else if (request.url === "/web") {
+    fs.appendFile("requests.log", `\n ${moment().format("LTS")} : /web`, (err) => {
+      if (err) {
+        console.log(err)}
+    })
+    fs.readFile("front/index.html", (error, data) => {
+      response.writeHead(200, { "Content-Type": "text/html" })
+      response.write(data)
+      response.end()
+    })
+  }
+  else if (request.url === "/dinosaurio") {
+    fs.readFile("front/dinosaurio.jpg", (error, data) => {
+      response.writeHead(200, { "Content-Type": "image/jpeg" })
+      response.write(data)
+      response.end()
+    })
+  }
 
   // El resto
   else {
+    fs.appendFile("requests.log", `\n ${moment().format("LTS")} : /404`, (err) => {
+      if (err) {
+        console.log(err)}
+    })
     // Http headers
     response.writeHead(404, {
       "Content-Type": "text/plain"
